@@ -1,0 +1,23 @@
+button {
+    cursor: pointer;
+}
+
+.cell {
+    width: 75px;
+    height: 75px;
+    border: 2px black solid;
+    background-color: white;
+}
+
+#gameBoard {
+    display: grid;
+    grid-template-columns: repeat(3, 75px);
+    margin: 20px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
