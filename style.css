@@ -7,6 +7,9 @@ button {
     height: 75px;
     border: 2px black solid;
     background-color: white;
+    font-size: 4mm;
+    color: black;
+    cursor: pointer;
 }
 
 #gameBoard {
