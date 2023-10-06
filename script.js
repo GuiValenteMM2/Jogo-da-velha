@@ -10,12 +10,19 @@ const GameBoard = (() => {
         document.querySelector('#gameBoard').innerHTML = boardHTML;
         const cellClick = document.querySelectorAll('.cell');
         cellClick.forEach((i) => {
-            i.addEventListener('click',() => Game.manageClick(i));
+            i.addEventListener("click", () => Game.manageClick(i));
         }
         );
     };
 
-    return {render}; 
+    const update = (index, value) => {
+        cells[index] = value;
+        render();
+    }
+
+    const getGameBoard = () => cells;
+
+    return {render, update, getGameBoard}; 
 })();
 
 const createPlayer = (name, mark) => {
@@ -34,20 +41,36 @@ const Game = (() => {
             createPlayer(document.querySelector('#player1').value, "X"),
             createPlayer(document.querySelector('#player2').value, "O")
         ];
-        currentPlayerIndex = 0;
         gameOver = false;
+        currentPlayerIndex = 0;
         GameBoard.render();
     }
 
-    const manageClick = (cellClick) => {
-        console.log(cellClick.id);
+    const restart = () => {
+        for (let i = 0; i < 9; i++) {
+            GameBoard.update(i, "");
+            GameBoard.render();
+        }
+    }
+
+    const manageClick = (cellClicked) => {
+        let index = parseInt(cellClicked.id.split('-')[1]);
+        if (GameBoard.getGameBoard()[index] !== ""){
+            return
+        }
+        GameBoard.update(index, players[currentPlayerIndex].mark);
+        currentPlayerIndex = currentPlayerIndex === 0 ? 1 : 0;
     }
 
     return {
         start,
-        manageClick
+        manageClick,
+        restart,
     }
 })();
 
-let startButton = document.querySelector('#startButton');
-startButton.addEventListener('click', () => Game.start());
+const restartButton = document.querySelector('#restartButton');
+restartButton.addEventListener('click', Game.restart);
+
+const startButton = document.querySelector('#startButton');
+startButton.addEventListener("click",() => Game.start());
