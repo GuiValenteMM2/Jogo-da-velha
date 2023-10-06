@@ -3,13 +3,16 @@ button {
 }
 
 .cell {
+    display: flex;
     width: 75px;
     height: 75px;
     border: 2px black solid;
     background-color: white;
-    font-size: 4mm;
+    font-size: 14mm;
     color: black;
     cursor: pointer;
+    align-items: center;
+    justify-content: center;
 }
 
 #gameBoard {

@@ -1,5 +1,6 @@
 const GameBoard = (() => {
-    let cells = ["", "", "", "", "", "", "", "", ""];
+
+    let cells = ["", "", "", "", "", "", "","",""]
 
     const render = () => {
         let boardHTML = "";
@@ -7,8 +8,14 @@ const GameBoard = (() => {
             boardHTML += `<div class="cell" id="cell-${index}">${cell}</div>`;
         })
         document.querySelector('#gameBoard').innerHTML = boardHTML;
-    }
-    return {render};
+        const cellClick = document.querySelectorAll('.cell');
+        cellClick.forEach((i) => {
+            i.addEventListener('click',() => Game.manageClick(i));
+        }
+        );
+    };
+
+    return {render}; 
 })();
 
 const createPlayer = (name, mark) => {
@@ -33,7 +40,7 @@ const Game = (() => {
     }
 
     const manageClick = (cellClick) => {
-        console.log(cellClick.target.id)
+        console.log(cellClick.id);
     }
 
     return {
@@ -44,6 +51,3 @@ const Game = (() => {
 
 let startButton = document.querySelector('#startButton');
 startButton.addEventListener('click', () => Game.start());
-
-let clickCell = document.querySelectorAll('.cell');
-clickCell.addEventListener('click', Game.manageClick(clickCell));
